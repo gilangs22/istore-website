@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - iStore Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>iStore</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item" data-page="products">
+                    <i class="fas fa-box"></i>
+                    <span>Produk</span>
+                </li>
+                <li class="nav-item" data-page="categories">
+                    <i class="fas fa-tags"></i>
+                    <span>Kategori</span>
+                </li>
+            </ul>
+            
+            <div class="nav-divider"></div>
+            
+            <ul>
+                <li class="nav-item">
+                    <a href="../frontend/index.html" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Lihat Website</span>
+                    </a>
+                </li>
+                <li class="nav-item logout" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="globalSearch" placeholder="Cari produk...">
+            </div>
+            
+            <div class="topbar-right">
+                <button class="btn-icon" id="refreshBtn" title="Refresh Data">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Admin</span>
+                        <span class="user-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+            <!-- DASHBOARD PAGE -->
+            <section class="page active" id="page-dashboard">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Selamat datang di Admin Panel iStore</p>
+                </div>
+                
+                <!-- STATS CARDS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalProducts">0</h3>
+                            <p>Total Produk</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalIphone">0</h3>
+                            <p>iPhone</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="lowStock">0</h3>
+                            <p>Stok Menipis</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="outOfStock">0</h3>
+                            <p>Stok Habis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUICK ACTIONS -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2>Aksi Cepat</h2>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="quick-btn" onclick="showPage('products'); openAddModal();">
+                            <i class="fas fa-plus"></i>
+                            <span>Tambah Produk</span>
+                        </button>
+                        <button class="quick-btn" onclick="showPage('products')">
+                            <i class="fas fa-list"></i>
+                            <span>Lihat Semua Produk</span>
+                        </button>
+                        <a href="../frontend/index.html" target="_blank" class="quick-btn">
+                            <i class="fas fa-eye"></i>
+                            <span>Preview Website</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RECENT PRODUCTS -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2>Produk Terbaru</h2>
+                        <button class="btn-text" onclick="showPage('products')">Lihat Semua</button>
+                    </div>
+                    <div class="recent-products" id="recentProducts">
+                        <!-- Loaded via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRODUCTS PAGE -->
+            <section class="page" id="page-products">
+                <div class="page-header">
+                    <div>
+                        <h1>Kelola Produk</h1>
+                        <p>Tambah, edit, dan hapus produk</p>
+                    </div>
+                    <button class="btn btn-primary" id="addProductBtn">
+                        <i class="fas fa-plus"></i>
+                        Tambah Produk
+                    </button>
+                </div>
+
+                <!-- FILTERS -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <select id="filterCategory">
+                            <option value="all">Semua Kategori</option>
+                            <option value="iphone">iPhone</option>
+                            <option value="casing">Casing</option>
+                            <option value="charger">Charger</option>
+                            <option value="aksesoris">Aksesoris</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="filterStock">
+                            <option value="all">Semua Stok</option>
+                            <option value="available">Tersedia</option>
+                            <option value="low">Menipis (≤5)</option>
+                            <option value="empty">Habis</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="filterSort">
+                            <option value="newest">Terbaru</option>
+                            <option value="oldest">Terlama</option>
+                            <option value="name_asc">Nama A-Z</option>
+                            <option value="name_desc">Nama Z-A</option>
+                            <option value="price_asc">Harga Terendah</option>
+                            <option value="price_desc">Harga Tertinggi</option>
+                        </select>
+                    </div>
+                    <div class="filter-group search">
+                        <input type="text" id="searchProduct" placeholder="Cari produk...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <!-- PRODUCTS TABLE -->
+                <div class="table-container">
+                    <table class="data-table" id="productsTable">
+                        <thead>
+                            <tr>
+                                <th width="50">
+                                    <input type="checkbox" id="selectAll">
+                                </th>
+                                <th width="80">Gambar</th>
+                                <th>Nama Produk</th>
+                                <th width="120">Kategori</th>
+                                <th width="150">Harga</th>
+                                <th width="100">Stok</th>
+                                <th width="80">Badge</th>
+                                <th width="150">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Loaded via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PAGINATION -->
+                <div class="pagination" id="pagination">
+                    <!-- Loaded via JS -->
+                </div>
+            </section>
+
+            <!-- CATEGORIES PAGE -->
+            <section class="page" id="page-categories">
+                <div class="page-header">
+                    <h1>Kategori</h1>
+                    <p>Statistik produk per kategori</p>
+                </div>
+
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Loaded via JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ADD/EDIT PRODUCT MODAL -->
+    <div class="modal" id="productModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tambah Produk</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="productForm" class="modal-body">
+                <input type="hidden" id="productId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productName">Nama Produk *</label>
+                        <input type="text" id="productName" name="name" required placeholder="Contoh: iPhone 15 Pro Max 256GB">
+                    </div>
+                </div>
+
+                <div class="form-row two-cols">
+                    <div class="form-group">
+                        <label for="productCategory">Kategori *</label>
+                        <select id="productCategory" name="category" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="iphone">iPhone</option>
+                            <option value="casing">Casing</option>
+                            <option value="charger">Charger</option>
+                            <option value="aksesoris">Aksesoris</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="productBadge">Badge</label>
+                        <select id="productBadge" name="badge">
+                            <option value="">Tanpa Badge</option>
+                            <option value="new">New</option>
+                            <option value="hot">Hot</option>
+                            <option value="sale">Sale</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row two-cols">
+                    <div class="form-group">
+                        <label for="productPrice">Harga (Rp) *</label>
+                        <input type="number" id="productPrice" name="price" required min="0" placeholder="Contoh: 21999000">
+                    </div>
+                    <div class="form-group">
+                        <label for="productStock">Stok *</label>
+                        <input type="number" id="productStock" name="stock" required min="0" placeholder="Contoh: 10">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productDescription">Deskripsi</label>
+                        <textarea id="productDescription" name="description" rows="3" placeholder="Deskripsi singkat produk..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gambar Produk</label>
+                        <div class="image-upload-container">
+                            <div class="image-preview" id="imagePreview">
+                                <img id="previewImg" src="" alt="Preview">
+                                <div class="placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <span>Preview Gambar</span>
+                                </div>
+                            </div>
+                            <div class="image-input-group">
+                                <div class="upload-option">
+                                    <label for="productImageFile" class="btn btn-outline btn-sm">
+                                        <i class="fas fa-upload"></i>
+                                        Upload File
+                                    </label>
+                                    <input type="file" id="productImageFile" name="imageFile" accept="image/*" hidden>
+                                </div>
+                                <div class="divider-text">atau</div>
+                                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                                    <input type="url" id="productImage" name="image" placeholder="URL gambar (https://...)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productSpecs">Spesifikasi (JSON)</label>
+                        <textarea id="productSpecs" name="specs" rows="4" placeholder='{"Layar": "6.7 inch", "Chip": "A17 Pro", "Kamera": "48MP"}'></textarea>
+                        <small class="form-hint">Format: {"key": "value", "key2": "value2"}</small>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-save"></i>
+                        Simpan Produk
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- DELETE CONFIRMATION MODAL -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h2>Konfirmasi Hapus</h2>
+                <button class="modal-close" onclick="closeDeleteModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Apakah kamu yakin ingin menghapus produk:</p>
+                    <strong id="deleteProductName"></strong>
+                    <p class="warning-text">Tindakan ini tidak dapat dibatalkan!</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Batal</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">
+                    <i class="fas fa-trash"></i>
+                    Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
