@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>iStore - Toko HP & Aksesoris Terpercaya</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="#" class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>iStore</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Beranda</a></li>
+                    <li><a href="#products" class="nav-link">Produk</a></li>
+                    <li><a href="#categories" class="nav-link">Kategori</a></li>
+                    <li><a href="#about" class="nav-link">Tentang</a></li>
+                    <li><a href="#contact" class="nav-link">Kontak</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button
+                        class="theme-toggle"
+                        id="themeToggle"
+                        title="Toggle Dark Mode"
+                    >
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <button class="search-btn" id="searchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="search-bar" id="searchBar">
+                <div class="container">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Cari produk iPhone, casing, charger..."
+                    />
+                    <button id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="hero-bg"></div>
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <span class="hero-badge">🔥 Promo Spesial Bulan Ini</span>
+                    <h1>
+                        Temukan
+                        <span class="gradient-text">iPhone</span> Impianmu
+                    </h1>
+                    <p>
+                        Dapatkan iPhone original dengan harga terbaik. Garansi
+                        resmi, cicilan mudah, dan pengiriman cepat ke seluruh
+                        Indonesia.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn btn-primary">
+                            <i class="fas fa-shopping-bag"></i>
+                            Lihat Produk
+                        </a>
+                        <a
+                            href="https://wa.me/6281234567890"
+                            target="_blank"
+                            class="btn btn-secondary"
+                        >
+                            <i class="fab fa-whatsapp"></i>
+                            Hubungi Kami
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Produk Tersedia</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Pelanggan Puas</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Original</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="phone-mockup">
+                        <img
+                            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=400&hei=400&fmt=png-alpha"
+                            alt="iPhone 15 Pro"
+                        />
+                    </div>
+                    <div class="floating-card card-1">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Garansi Resmi</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-truck"></i>
+                        <span>Free Ongkir</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-wave">
+                <svg
+                    viewBox="0 0 1440 120"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+                        fill="var(--bg-primary)"
+                    />
+                </svg>
+            </div>
+        </section>
+
+        <!-- CATEGORIES SECTION -->
+        <section class="categories" id="categories">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Kategori</span>
+                    <h2>Pilih Kategori Produk</h2>
+                    <p>
+                        Temukan berbagai produk Apple dan aksesoris berkualitas
+                    </p>
+                </div>
+                <div class="category-grid">
+                    <div class="category-card" data-category="iphone">
+                        <div class="category-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>iPhone</h3>
+                        <p>iPhone terbaru dengan garansi resmi</p>
+                        <span class="category-count">50+ Produk</span>
+                    </div>
+                    <div class="category-card" data-category="casing">
+                        <div class="category-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Casing</h3>
+                        <p>Lindungi iPhone dengan case premium</p>
+                        <span class="category-count">100+ Produk</span>
+                    </div>
+                    <div class="category-card" data-category="charger">
+                        <div class="category-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Charger</h3>
+                        <p>Fast charging original Apple</p>
+                        <span class="category-count">30+ Produk</span>
+                    </div>
+                    <div class="category-card" data-category="aksesoris">
+                        <div class="category-icon">
+                            <i class="fas fa-headphones"></i>
+                        </div>
+                        <h3>Aksesoris</h3>
+                        <p>AirPods, Cable, dan lainnya</p>
+                        <span class="category-count">80+ Produk</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTS SECTION -->
+        <section class="products" id="products">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Produk Kami</span>
+                    <h2>Koleksi Terbaru</h2>
+                    <p>Produk original dengan kualitas terjamin</p>
+                </div>
+
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">
+                        Semua
+                    </button>
+                    <button class="filter-btn" data-filter="iphone">
+                        iPhone
+                    </button>
+                    <button class="filter-btn" data-filter="casing">
+                        Casing
+                    </button>
+                    <button class="filter-btn" data-filter="charger">
+                        Charger
+                    </button>
+                    <button class="filter-btn" data-filter="aksesoris">
+                        Aksesoris
+                    </button>
+                </div>
+
+                <div class="products-grid" id="productsGrid"></div>
+
+                <div class="load-more-container">
+                    <button class="btn btn-outline" id="loadMoreBtn">
+                        <i class="fas fa-plus"></i>
+                        Lihat Lebih Banyak
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Keunggulan</span>
+                    <h2>Mengapa Memilih Kami?</h2>
+                    <p>Komitmen kami untuk memberikan pelayanan terbaik</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>100% Original</h3>
+                        <p>
+                            Semua produk dijamin original dengan segel resmi
+                            Apple
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Garansi Resmi</h3>
+                        <p>
+                            Garansi resmi Apple hingga 1 tahun untuk semua
+                            iPhone
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>Pengiriman Cepat</h3>
+                        <p>Dikirim di hari yang sama untuk area Jabodetabek</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Support 24/7</h3>
+                        <p>Tim customer service siap membantu kapan saja</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?w=600"
+                            alt="Apple Store"
+                        />
+                        <div class="about-badge">
+                            <span class="years">5+</span>
+                            <span>Tahun Pengalaman</span>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <span class="section-badge">Tentang Kami</span>
+                        <h2>Toko HP Terpercaya Sejak 2019</h2>
+                        <p>
+                            iStore adalah toko smartphone dan aksesoris
+                            terpercaya yang menyediakan produk Apple original
+                            dengan harga kompetitif. Kami berkomitmen memberikan
+                            pelayanan terbaik dan produk berkualitas untuk
+                            setiap pelanggan.
+                        </p>
+                        <ul class="about-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i> Produk 100%
+                                Original & Bergaransi
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Harga
+                                Kompetitif & Transparan
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Pelayanan
+                                Ramah & Profesional
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Bisa COD &
+                                Cicilan
+                            </li>
+                        </ul>
+                        <a
+                            href="https://wa.me/6281234567890"
+                            target="_blank"
+                            class="btn btn-primary"
+                        >
+                            <i class="fab fa-whatsapp"></i>
+                            Chat Sekarang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Kontak</span>
+                    <h2>Hubungi Kami</h2>
+                    <p>Ada pertanyaan? Jangan ragu untuk menghubungi kami</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p>0812-3456-7890</p>
+                        <a
+                            href="https://wa.me/6281234567890"
+                            target="_blank"
+                            class="contact-link"
+                            >Chat Sekarang</a
+                        >
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>hello@istore.id</p>
+                        <a href="mailto:hello@istore.id" class="contact-link"
+                            >Kirim Email</a
+                        >
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Alamat</h3>
+                        <p>Jakarta Selatan, Indonesia</p>
+                        <a href="#" class="contact-link">Lihat Peta</a>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Jam Operasional</h3>
+                        <p>Senin - Minggu</p>
+                        <span class="contact-link">09:00 - 21:00 WIB</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="#" class="logo">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>iStore</span>
+                        </a>
+                        <p>
+                            Toko smartphone dan aksesoris Apple terpercaya
+                            dengan produk original dan harga terbaik.
+                        </p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-tiktok"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Menu</h4>
+                        <ul>
+                            <li><a href="#home">Beranda</a></li>
+                            <li><a href="#products">Produk</a></li>
+                            <li><a href="#about">Tentang Kami</a></li>
+                            <li><a href="#contact">Kontak</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Kategori</h4>
+                        <ul>
+                            <li><a href="#">iPhone</a></li>
+                            <li><a href="#">Casing</a></li>
+                            <li><a href="#">Charger</a></li>
+                            <li><a href="#">Aksesoris</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Bantuan</h4>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Cara Order</a></li>
+                            <li><a href="#">Kebijakan Privasi</a></li>
+                            <li><a href="#">Syarat & Ketentuan</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 iStore. All rights reserved.</p>
+                    <p>Made with <i class="fas fa-heart"></i> in Indonesia</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- FLOATING WHATSAPP -->
+        <a
+            href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20produk%20di%20iStore"
+            target="_blank"
+            class="whatsapp-float"
+        >
+            <i class="fab fa-whatsapp"></i>
+            <span>Chat Kami</span>
+        </a>
+
+        <!-- PRODUCT MODAL -->
+        <div class="modal" id="productModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img id="modalImage" src="" alt="" />
+                        <span class="modal-badge" id="modalBadge"></span>
+                    </div>
+                    <div class="modal-info">
+                        <span class="modal-category" id="modalCategory"></span>
+                        <h2 id="modalTitle"></h2>
+                        <p class="modal-description" id="modalDescription"></p>
+                        <div class="modal-price">
+                            <span class="price" id="modalPrice"></span>
+                            <span class="stock" id="modalStock"></span>
+                        </div>
+                        <div class="modal-specs" id="modalSpecs"></div>
+                        <div class="modal-actions">
+                            <a
+                                href="#"
+                                class="btn btn-primary btn-whatsapp"
+                                id="modalWhatsapp"
+                            >
+                                <i class="fab fa-whatsapp"></i>
+                                Pesan via WhatsApp
+                            </a>
+                            <button class="btn btn-outline" id="modalShare">
+                                <i class="fas fa-share-alt"></i>
+                                Bagikan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK TO TOP -->
+        <button class="back-to-top" id="backToTop">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+
+        <script src="app.js"></script>
+    </body>
+</html>
