@@ -65,8 +65,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // Static Files
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/admin", express.static(path.join(__dirname, "admin")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// ========== TAMBAHKAN INI (ADMIN ROUTES) ==========
+const adminRoutes = require('./admin/admin');
+app.use('/admin', adminRoutes);
+// ==================================================
+
+// Admin static files (CSS, JS, images)
+app.use("/admin", express.static(path.join(__dirname, "admin")));
 
 // ============ API ROUTES ============
 
