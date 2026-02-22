@@ -3,6 +3,12 @@
 // ========================================
 
 const API_URL = '/api';
+
+// Inline SVG Placeholder (no external dependency!)
+const PLACEHOLDER_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect fill='%23f0f0f0' width='200' height='200'/%3E%3Ctext x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%23999'%3ENo Image%3C/text%3E%3Cpath d='M70 90 L85 105 L95 95 L110 110 L130 90' stroke='%23ccc' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='75' cy='75' r='8' fill='%23ccc'/%3E%3C/svg%3E";
+
+const ERROR_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect fill='%23ffe0e0' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%23cc0000'%3EError%3C/text%3E%3C/svg%3E";
+
 let editingProductId = null;
 let allProducts = [];
 
@@ -106,7 +112,7 @@ function handleImageUrlPreview(e) {
     preview.innerHTML = `
       <img src="${url}" alt="Preview" 
            style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 2px solid #ddd;"
-           onerror="this.src='https://via.placeholder.com/200?text=Invalid+URL'">
+           onerror="this.src='${ERROR_IMAGE}'">
       <p style="margin-top: 5px; color: #666; font-size: 12px;">🔗 URL Gambar</p>
     `;
 
@@ -278,10 +284,10 @@ function displayProducts(products) {
       <tr>
         <td style="text-align: center;">${product.id}</td>
         <td style="text-align: center;">
-          <img src="${product.image || 'https://via.placeholder.com/60?text=No+Image'}" 
+          <img src="${product.image || PLACEHOLDER_IMAGE}"
                alt="${product.name}" 
                style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 2px solid #eee;"
-               onerror="this.src='https://via.placeholder.com/60?text=Error'">
+               onerror="this.src='${ERROR_IMAGE}'">
         </td>
         <td>
           <strong>${product.name}</strong>
