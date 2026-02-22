@@ -63,18 +63,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static Files
+// Static Files (Public)
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ========== TAMBAHKAN INI (ADMIN ROUTES) ==========
-const adminRoutes = require('./admin/admin');
+// ============================================
+// ADMIN ROUTES (Server-side)
+// ============================================
+const adminRoutes = require('./routes/admin');
 app.use('/admin', adminRoutes);
-// ==================================================
 
-// Admin static files (CSS, JS, images)
+// Admin Static Files (CSS, JS, Images)
+// This comes AFTER routes so dynamic routes take priority
 app.use("/admin", express.static(path.join(__dirname, "admin")));
-
 // ============ API ROUTES ============
 
 // Upload Image
