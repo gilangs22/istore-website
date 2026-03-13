@@ -22,7 +22,30 @@ const pool = new Pool({
 
 pool
   .query("SELECT NOW()")
-  .then(() => console.log("✅ Database connected!"))
+  .then(async () => {
+    console.log("✅ Database connected!");
+    // Ensure table exists
+    try {
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS products (
+          id SERIAL PRIMARY KEY,
+          name VARCHAR(255) NOT NULL,
+          category VARCHAR(50) NOT NULL,
+          price INTEGER NOT NULL,
+          stock INTEGER DEFAULT 0,
+          image VARCHAR(255),
+          description TEXT,
+          badge VARCHAR(50),
+          specs JSONB,
+          created_at TIMESTAMP DEFAULT NOW(),
+          updated_at TIMESTAMP DEFAULT NOW()
+        );
+      `);
+      console.log("✅ Table 'products' is ready!");
+    } catch (err) {
+      console.error("❌ Error creating table:", err.message);
+    }
+  })
   .catch((err) => console.error("❌ DB Error:", err.message));
 
 // Multer Configuration (Memory Storage for Supabase)
