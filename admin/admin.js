@@ -252,12 +252,17 @@ async function handleFormSubmit(e) {
 
     // Parse specs (optional JSON)
     const specsInput = document.getElementById('productSpecs')?.value.trim();
-    if (specsInput) {
+    if (specsInput && specsInput !== "" && specsInput !== "null") {
       try {
-        productData.specs = JSON.parse(specsInput);
+        // Coba perbaiki jika user pakai kutip satu ' ganti ke kutip dua "
+        const fixedJson = specsInput.replace(/'/g, '"');
+        productData.specs = JSON.parse(fixedJson);
       } catch (err) {
-        throw new Error('Format specs harus JSON yang valid! Contoh: {"key": "value"}');
+        console.error("JSON Parse Error:", err);
+        throw new Error('Format Spesifikasi salah! Gunakan format: {"Layar": "6.7 inci", "RAM": "8GB"}. Pastikan menggunakan tanda kutip dua (").');
       }
+    } else {
+      productData.specs = null;
     }
 
     // API Request
@@ -411,6 +416,8 @@ async function editProduct(id) {
     // Specs
     if (product.specs) {
       document.getElementById('productSpecs').value = JSON.stringify(product.specs, null, 2);
+    } else {
+      document.getElementById('productSpecs').value = '';
     }
 
     // Show preview if image exists
