@@ -279,7 +279,7 @@ async function handleFormSubmit(e) {
 
     const result = await response.json();
 
-    if (result.success || response.ok) {
+    if (response.ok && result.success) {
       showToast(
         editingProductId ? '✅ Produk berhasil diupdate!' : '✅ Produk berhasil ditambahkan!',
         'success'
@@ -288,7 +288,9 @@ async function handleFormSubmit(e) {
       loadProducts();
       loadStats();
     } else {
-      throw new Error(result.message || 'Gagal menyimpan produk');
+      // Tampilkan pesan error spesifik dari server jika ada
+      const errorMsg = result.message || 'Gagal menyimpan produk ke database';
+      throw new Error(errorMsg);
     }
 
   } catch (error) {
