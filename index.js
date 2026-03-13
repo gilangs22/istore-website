@@ -4,9 +4,15 @@ const path = require("path");
 const { Pool } = require("pg");
 const multer = require("multer");
 const fs = require("fs");
+const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Supabase Configuration
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Database
 const pool = new Pool({
@@ -19,26 +25,8 @@ pool
   .then(() => console.log("✅ Database connected!"))
   .catch((err) => console.error("❌ DB Error:", err.message));
 
-// Create uploads folder if not exists
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
-  console.log("📁 Folder uploads dibuat!");
-}
-
-// Multer Configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    const uniqueName =
-      Date.now() +
-      "-" +
-      Math.round(Math.random() * 1e9) +
-      path.extname(file.originalname);
-    cb(null, uniqueName);
-  },
-});
+// Multer Configuration (Memory Storage for Supabase)
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage: storage,
@@ -78,20 +66,43 @@ app.use('/admin', adminRoutes);
 app.use("/admin", express.static(path.join(__dirname, "admin")));
 // ============ API ROUTES ============
 
-// Upload Image
-app.post("/api/upload", upload.single("image"), (req, res) => {
+// Upload Image to Supabase Storage
+app.post("/api/upload", upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
       return res
         .status(400)
         .json({ success: false, message: "Tidak ada file yang diupload" });
     }
-    const imageUrl = `/uploads/${req.file.filename}`;
-    console.log("📸 Gambar diupload:", imageUrl);
+
+    const file = req.file;
+    const fileExt = path.extname(file.originalname);
+    const fileName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
+    const filePath = `product-images/${fileName}`;
+
+    // Upload to Supabase Storage
+    const { data, error } = await supabase.storage
+      .from("products")
+      .upload(filePath, file.buffer, {
+        contentType: file.mimetype,
+        upsert: false,
+      });
+
+    if (error) throw error;
+
+    // Get Public URL
+    const { data: urlData } = supabase.storage
+      .from("products")
+      .getPublicUrl(filePath);
+
+    const imageUrl = urlData.publicUrl;
+    console.log("📸 Gambar diupload ke Supabase:", imageUrl);
+
     res.json({
       success: true,
       imageUrl: imageUrl,
-      filename: req.file.filename,
+      filename: fileName,
+      path: filePath
     });
   } catch (error) {
     console.error("Upload error:", error);
@@ -249,13 +260,26 @@ app.delete("/api/products/:id", async (req, res) => {
         .json({ success: false, message: "Product not found" });
     }
 
-    // Delete image file if exists
-    if (result.rows[0].image && result.rows[0].image.startsWith("/uploads/")) {
-      const filename = result.rows[0].image.replace("/uploads/", "");
-      const filepath = path.join(__dirname, "uploads", filename);
-      if (fs.existsSync(filepath)) {
-        fs.unlinkSync(filepath);
-        console.log("🗑️ Gambar dihapus:", filename);
+    // Delete image from Supabase if exists
+    if (result.rows[0].image && result.rows[0].image.includes("supabase.co")) {
+      try {
+        // Extract path from URL (e.g., .../products/object/public/products/product-images/123.jpg)
+        // Usually: products/product-images/filename.ext
+        const urlParts = result.rows[0].image.split("/public/products/");
+        if (urlParts.length > 1) {
+          const filePath = urlParts[1];
+          const { error: deleteError } = await supabase.storage
+            .from("products")
+            .remove([filePath]);
+          
+          if (deleteError) {
+            console.error("⚠️ Gagal hapus gambar di Supabase:", deleteError.message);
+          } else {
+            console.log("🗑️ Gambar dihapus dari Supabase:", filePath);
+          }
+        }
+      } catch (err) {
+        console.error("⚠️ Error saat menghapus gambar:", err.message);
       }
     }
 

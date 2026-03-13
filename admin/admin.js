@@ -25,6 +25,32 @@ document.addEventListener('DOMContentLoaded', () => {
 // EVENT LISTENERS
 // ========================================
 function setupEventListeners() {
+  // Navigation Sidebar
+  const navItems = document.querySelectorAll('.nav-item[data-page]');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const pageId = item.getAttribute('data-page');
+      showPage(pageId);
+    });
+  });
+
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const sidebarClose = document.getElementById('sidebarClose');
+
+  if (menuToggle && sidebar) {
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.add('active');
+    });
+  }
+
+  if (sidebarClose && sidebar) {
+    sidebarClose.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+    });
+  }
+
   // Form Submit
   const productForm = document.getElementById('productForm');
   if (productForm) {
@@ -64,6 +90,51 @@ function setupEventListeners() {
   if (cancelEditBtn) {
     cancelEditBtn.addEventListener('click', resetForm);
   }
+}
+
+// ========================================
+// NAVIGATION
+// ========================================
+function showPage(pageId) {
+  // Update sidebar active state
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('data-page') === pageId) {
+      item.classList.add('active');
+    }
+  });
+
+  // Update page visibility
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  const targetPage = document.getElementById(`page-${pageId}`);
+  if (targetPage) {
+    targetPage.classList.add('active');
+  }
+
+  // Close sidebar on mobile
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    sidebar.classList.remove('active');
+  }
+
+  // Title update
+  const titles = {
+    'dashboard': 'Dashboard - iStore Admin',
+    'products': 'Kelola Produk - iStore Admin',
+    'categories': 'Kelola Kategori - iStore Admin'
+  };
+  if (titles[pageId]) {
+    document.title = titles[pageId];
+  }
+}
+
+function navigateToProducts() {
+  showPage('products');
+  resetForm();
+  document.getElementById('productName').focus();
 }
 
 // ========================================
