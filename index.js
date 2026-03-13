@@ -229,6 +229,7 @@ app.post("/api/products", async (req, res) => {
         data: result.rows[0],
       });
   } catch (error) {
+    console.error("❌ DB Insert Error:", error.message);
     res.status(500).json({ success: false, message: error.message });
   }
 });
