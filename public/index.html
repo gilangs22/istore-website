@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakul iPhone | Jual Beli iPhone Bekas Berkualitas & Transparan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-mode">
+    <div class="cursor-glow"></div>
+    <div class="bg-decor-container">
+        <div class="bird bird-1"></div>
+        <div class="bird bird-2"></div>
+        <div class="bird bird-3"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <nav class="nav">
+        <div class="container nav-wrapper">
+            <a href="/" class="nav-logo">
+                <i class="fab fa-apple"></i>
+                <span>Bakul iPhone</span>
+            </a>
+            <div class="nav-menu">
+                <button id="darkModeToggle" class="nav-icon-btn"><i class="fas fa-moon"></i></button>
+                <a href="#katalog" class="nav-link">Katalog</a>
+                <a href="/admin" class="nav-btn-admin">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <div class="hero-badge"><i class="fas fa-check-shield"></i> Terverifikasi Original</div>
+                <h1>Upgrade iPhone <br><span class="text-gradient">Tanpa Was-was.</span></h1>
+                <p>Cek kondisi BH, Storage, dan Minus secara transparan. Kejujuran adalah modal utama kami.</p>
+                <div class="hero-actions">
+                    <a href="#katalog" class="btn btn-primary">Lihat Stok Ready</a>
+                    <div class="hero-stats">
+                        <div class="stat-item"><b>1k+</b> <span>Happy User</span></div>
+                        <div class="stat-item"><b>4.9</b> <span>Rating</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1"><i class="fas fa-battery-full"></i> BH 95%+</div>
+                <div class="floating-card card-2"><i class="fas fa-star"></i> Mulus</div>
+                <img src="hero-iphone.png" 
+                     alt="Bakul iPhone Collection" 
+                     class="hero-img">
+            </div>
+        </div>
+    </header>
+
+    <!-- Kenapa Kami Section -->
+    <section class="why-us">
+        <div class="container">
+            <div class="section-center">
+                <span class="sub-title">Keunggulan Kami</span>
+                <h2>Kenapa Harus di Bakul iPhone?</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="f-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Kondisi Jujur</h3>
+                    <p>Minus sekecil apapun kami tulis. Tidak ada yang ditutup-tutupi.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="f-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Garansi Aman</h3>
+                    <p>Semua unit bergaransi fungsional. Kami ganti jika bermasalah.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="f-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>BH Terjamin</h3>
+                    <p>Battery Health rata-rata di atas 90%, performa tetap jos!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Katalog Section -->
+    <main class="container content-area" id="katalog">
+        <div class="section-top">
+            <div class="section-title">
+                <h2>Ready Stok Hari Ini</h2>
+                <p>Silakan pilih unit idamanmu sebelum kehabisan!</p>
+            </div>
+            <div class="controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari iPhone...">
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn active" data-category="all">Semua</button>
+                    <button class="filter-btn" data-category="iphone">iPhone</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="productGrid" class="product-grid">
+            <div class="loader-container"><div class="loader"></div></div>
+        </div>
+    </main>
+
+    <!-- WhatsApp CTA Section -->
+    <section class="cta-banner container">
+        <div class="cta-content">
+            <div class="cta-text">
+                <h2>Belum Nemu yang Pas?</h2>
+                <p>Tanya admin atau titip pesan unit idamanmu. Kami bantu cari sampai dapat!</p>
+            </div>
+            <a href="https://wa.me/62895367072329" class="btn-cta-wa">
+                <i class="fab fa-whatsapp"></i> Chat Admin Sekarang
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="nav-logo">
+                    <i class="fab fa-apple"></i>
+                    <span>Bakul iPhone</span>
+                </div>
+                <p>Spesialis iPhone Second berkualitas tinggi di Indonesia. Memberikan layanan jujur dan transparan.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/62895367072329"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Link Cepat</h4>
+                <ul>
+                    <li><a href="#katalog">Katalog Produk</a></li>
+                    <li><a href="/admin">Panel Admin</a></li>
+                    <li><a href="#">Cara Order</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Kontak Kami</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Surabaya, Jawa Timur</p>
+                <p><i class="fas fa-phone"></i> +62 895-3670-72329</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 <b>Bakul iPhone</b>. Hand-picked Quality Second.</p>
+        </div>
+    </footer>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

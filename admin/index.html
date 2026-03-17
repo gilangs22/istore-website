@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Bakul iPhone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body">
+    <!-- Login Overlay -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-bg-decor">
+            <div class="login-blob blob-1"></div>
+            <div class="login-blob blob-2"></div>
+            <div class="login-blob blob-3"></div>
+        </div>
+        <div class="login-card">
+            <i class="fab fa-apple login-logo"></i>
+            <h2>Bakul iPhone Admin</h2>
+            <p>Silakan masuk untuk mengelola stok</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">Masuk Ke Panel</button>
+            </form>
+            <p id="loginError" style="color: #e02d2d; font-size: 0.85rem; margin-top: 15px; display: none;">Username atau password salah!</p>
+        </div>
+    </div>
+
+    <div class="admin-container" id="mainDashboard" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fab fa-apple"></i>
+                <span>Bakul Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="products"><i class="fas fa-box"></i> Produk</a>
+                <a href="/" class="nav-item"><i class="fas fa-external-link-alt"></i> Lihat Web</a>
+                <button onclick="logout()" class="nav-item btn-logout" style="width:100%; border:none; background:none; cursor:pointer;"><i class="fas fa-sign-out-alt"></i> Keluar Admin</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="formTitle">Tambah Produk Baru</h1>
+            </header>
+
+            <!-- Form Section -->
+            <section class="form-card">
+                <form id="productForm">
+                    <div class="form-grid">
+                        <!-- Informasi Dasar -->
+                        <div class="form-group">
+                            <label>Nama Produk</label>
+                            <input type="text" id="productName" placeholder="Contoh: iPhone 11 128GB Black" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <select id="productCategory" required>
+                                <option value="iphone">iPhone</option>
+                                <option value="aksesoris">Aksesoris</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Harga (Rp)</label>
+                            <input type="number" id="productPrice" placeholder="Contoh: 5500000" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Stok Unit</label>
+                            <input type="number" id="productStock" value="1" required>
+                        </div>
+
+                        <!-- Spesifikasi Khusus iPhone -->
+                        <div class="form-group">
+                            <label>Battery Health (%)</label>
+                            <input type="number" id="productBH" placeholder="Contoh: 88">
+                        </div>
+                        <div class="form-group">
+                            <label>Penyimpanan (Storage)</label>
+                            <input type="text" id="productStorage" placeholder="Contoh: 128GB">
+                        </div>
+                        <div class="form-group">
+                            <label>Kondisi Kamera</label>
+                            <input type="text" id="productCamera" placeholder="Contoh: Normal / Jernih">
+                        </div>
+                        <div class="form-group">
+                            <label>Status Face ID / Touch ID</label>
+                            <input type="text" id="productFaceId" placeholder="Contoh: Normal / ON">
+                        </div>
+                        <div class="form-group">
+                            <label>Kondisi Layar</label>
+                            <input type="text" id="productScreen" placeholder="Contoh: Mulus / Ada Shadow tipis">
+                        </div>
+                        <div class="form-group">
+                            <label>Kondisi Body</label>
+                            <input type="text" id="productBody" placeholder="Contoh: Mulus / Lecet pemakaian">
+                        </div>
+                        <div class="form-group">
+                            <label>Status iCloud</label>
+                            <input type="text" id="productIcloud" placeholder="Contoh: Clean / Siap Login">
+                        </div>
+                        <div class="form-group">
+                            <label>Status IMEI</label>
+                            <input type="text" id="productImei" placeholder="Contoh: Aman / All Provider">
+                        </div>
+                        <div class="form-group">
+                            <label>Kelengkapan</label>
+                            <input type="text" id="productCompleteness" placeholder="Contoh: Fullset / Unit + Kabel">
+                        </div>
+                        <div class="form-group">
+                            <label>Tahun Rilis</label>
+                            <input type="text" id="productReleaseYear" placeholder="Contoh: 2019">
+                        </div>
+                    </div>
+
+                    <!-- Gambar & Deskripsi -->
+                    <div class="form-group full-width">
+                        <label>Gambar Produk</label>
+                        <div class="image-upload-wrapper">
+                            <input type="file" id="productImageFile" accept="image/*">
+                            <input type="text" id="productImage" placeholder="Atau masukkan URL Gambar langsung">
+                        </div>
+                        <div id="imagePreview" class="image-preview"></div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Catatan Khusus / Minus (Jujur)</label>
+                        <textarea id="productMinus" rows="3" placeholder="Jelaskan kondisi sejujur-jujurnya..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancelEdit" class="btn btn-secondary" style="display:none;">Batal Edit</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Simpan Produk</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Table Section -->
+            <section class="table-card">
+                <div class="table-header">
+                    <h2>Daftar Inventori Stok</h2>
+                    <span id="productCount">0 unit</span>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Gambar</th>
+                                <th>Produk</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Data dimuat via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
